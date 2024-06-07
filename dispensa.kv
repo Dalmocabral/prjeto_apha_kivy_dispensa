@@ -1,34 +1,81 @@
-BoxLayout:
-    orientation: 'vertical'
-    spacing: 10
-    padding: 10
+ScreenManager:
+    MenuScreen:
+    AddUserScreen:
+    UserListScreen:
 
-    Label:
-        text: 'Dispensa Operadores Rio Brasil'
-        font_size: 24
-        size_hint_y: None
-        height: 50
-
+<MenuScreen>:
+    name: 'menu'
     BoxLayout:
-        size_hint_y: None
-        height: 40
+        orientation: 'vertical'
         spacing: 10
+        padding: 10
+        Label:
+            text: 'Menu Principal'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+        Button:
+            text: 'Adicionar Usuário'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'add_user'
+        Button:
+            text: 'Visualizar Escala'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'user_list'
+
+<AddUserScreen>:
+    name: 'add_user'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+        Label:
+            text: 'Adicionar Usuário'
+            font_size: 24
+            size_hint_y: None
+            height: 50
         TextInput:
             id: user_name_input
             hint_text: 'Nome do Usuário'
-        Button:
-            text: 'Adicionar Usuário'
-            on_press: app.add_user(user_name_input.text)
-
-    ScrollView:
-        BoxLayout:
-            id: users_box
-            orientation: 'vertical'
             size_hint_y: None
-            height: self.minimum_height
+            height: 50
+        Button:
+            text: 'Adicionar'
+            size_hint_y: None
+            height: 50
+            on_press: app.add_user(user_name_input.text)
+        Button:
+            text: 'Voltar ao Menu'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'menu'
 
-    Button:
-        text: 'Copiar para WhatsApp'
-        size_hint_y: None
-        height: 50
-        on_press: app.copy_to_clipboard()
+<UserListScreen>:
+    name: 'user_list'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        padding: 10
+        Label:
+            text: 'Escala de Usuários'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+        ScrollView:
+            BoxLayout:
+                id: users_box
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+        Button:
+            text: 'Voltar ao Menu'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'menu'
+        Button:
+            text: 'Copiar para WhatsApp'
+            size_hint_y: None
+            height: 50
+            on_press: app.copy_to_clipboard()
