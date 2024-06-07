@@ -1,0 +1,34 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    Label:
+        text: 'Dispensa Operadores Rio Brasil'
+        font_size: 24
+        size_hint_y: None
+        height: 50
+
+    BoxLayout:
+        size_hint_y: None
+        height: 40
+        spacing: 10
+        TextInput:
+            id: user_name_input
+            hint_text: 'Nome do Usuário'
+        Button:
+            text: 'Adicionar Usuário'
+            on_press: app.add_user(user_name_input.text)
+
+    ScrollView:
+        BoxLayout:
+            id: users_box
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+
+    Button:
+        text: 'Copiar para WhatsApp'
+        size_hint_y: None
+        height: 50
+        on_press: app.copy_to_clipboard()
